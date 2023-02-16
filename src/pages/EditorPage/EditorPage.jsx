@@ -1,7 +1,7 @@
 import "./EditorPage.scss";
 
 // libraries
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // components
 import TextEditorButtons from "../../components/TextEditorButtons/TextEditorButtons";
@@ -11,6 +11,9 @@ import checkImg from "../../assets/icons/check.svg";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
+    const [currentHighlight, setCurrentHighlight] = useState("");
+
+    const highlightRef = useRef(null);
 
     const handleRequest = (event) => {
         if (event.key === "Enter" && userInput.includes("//")) {
@@ -33,18 +36,30 @@ export default function EditorPage() {
         }
     };
 
+    const handleSelection = () => {
+        const start = highlightRef.current.selectionStart;
+        const end = highlightRef.current.selectionEnd;
+        const highlightedText = highlightRef.current.value.substring(start, end);
+
+        setCurrentHighlight(highlightedText);
+    };
+
+    const handleGPT = (event) => {
+        console.log(event);
+    };
+
     return (
         <div className="editor-page">
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
-                    <TextEditorButtons name="Enhance" />
+                    <TextEditorButtons name="Enhance" handleGPT={handleGPT} />
                     <div className="editor-page__nav-width-mood">
-                        <TextEditorButtons name="Informal" />
-                        <TextEditorButtons name="Formal" />
+                        <TextEditorButtons name="Informal" handleGPT={handleGPT} />
+                        <TextEditorButtons name="Formal" handleGPT={handleGPT} />
                     </div>
                     <div className="editor-page__nav-width-length">
-                        <TextEditorButtons name="Shorten" />
-                        <TextEditorButtons name="Expand" />
+                        <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
+                        <TextEditorButtons name="Elaborate" handleGPT={handleGPT} />
                     </div>
                 </div>
                 <div className="editor-page__nav-placeholder">
@@ -54,6 +69,7 @@ export default function EditorPage() {
             <div className="editor-page__box">
                 <div className="editor-page__box-editor">
                     <textarea
+                        ref={highlightRef}
                         className="editor-page__box-editor-input"
                         placeholder="Write or paste text here..."
                         value={userInput}
