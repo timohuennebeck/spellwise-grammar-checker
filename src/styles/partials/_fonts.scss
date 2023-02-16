@@ -1,25 +1,25 @@
 @use "./mixins" as *;
 
 @font-face {
-    font-family: "Roboto";
+    font-family: "Poppins";
     font-weight: 400;
-    src: url(../../assets//fonts/Roboto-Regular.ttf);
+    src: url(../../assets/fonts/Poppins-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Roboto";
+    font-family: "Poppins";
     font-weight: 500;
-    src: url(../../assets/fonts/Roboto-Medium.ttf);
+    src: url(../../assets/fonts/Poppins-Medium.ttf);
 }
 
 @font-face {
-    font-family: "Roboto";
+    font-family: "Poppins";
     font-weight: 700;
-    src: url(../../assets/fonts/Roboto-Bold.ttf);
+    src: url(../../assets/fonts/Poppins-Bold.ttf);
 }
 
 * {
-    font-family: "Roboto";
+    font-family: "Poppins";
 }
 
 h1 {

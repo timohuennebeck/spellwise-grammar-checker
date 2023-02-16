@@ -6,15 +6,11 @@ import React, { useEffect, useState } from "react";
 // components
 import TextEditorButtons from "../../components/TextEditorButtons/TextEditorButtons";
 
+// images
+import checkImg from "../../assets/icons/check.svg";
+
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
-    const [currentWords, setCurrentWords] = useState(0);
-    const [currentCharacters, setCurrentCharacters] = useState(0);
-
-    useEffect(() => {
-        setCurrentWords(userInput.split(" ").length - 1);
-        setCurrentCharacters(userInput.split("").length);
-    }, [userInput]);
 
     const handleRequest = (event) => {
         if (event.key === "Enter" && userInput.includes("//")) {
@@ -74,14 +70,28 @@ export default function EditorPage() {
                             </div>
                             <div className="editor-page__box-editor-choose-box-words">
                                 <p>
-                                    {currentWords} Words ({currentCharacters} Characters)
+                                    {userInput.split(" ").length - 1} Words (
+                                    {userInput.split("").length} Characters)
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="editor-page__box-suggestions">
-                    <span className="editor-page__box-suggestions-data">Your Suggestions</span>
+                    <span className="editor-page__box-suggestions-data">Your Recommendations</span>
+                    <div className="editor-page__box-suggestions-content">
+                        <div className="editor-page__box-suggestions-content-placeholder">
+                            <img
+                                className="editor-page__box-suggestions-content-placeholder-img"
+                                src={checkImg}
+                                alt=""
+                            />
+                            <span className="editor-page__box-suggestions-content-placeholder-header">
+                                So far, so good!
+                            </span>
+                            <p>Now, let’s dive deeper and see what alternatives are available.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
