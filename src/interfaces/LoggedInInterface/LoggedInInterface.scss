@@ -1,0 +1,10 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.logged-in {
+    height: calc(100vh - 7.25rem);
+
+    &__outlet {
+        height: 100%;
+    }
+}

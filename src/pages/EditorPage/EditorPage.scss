@@ -1,0 +1,84 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.editor-page {
+    height: 100%;
+
+    &__nav {
+        @include flex-space-between;
+        background-color: $prim-color-1;
+        border-bottom: 1px solid $prim-color-3;
+        padding: $small-padding;
+
+        &-width {
+            @include flex-vertical;
+            justify-content: center;
+            gap: $small-gap;
+            width: 100%;
+
+            &-mood,
+            &-length {
+                @include flex-vertical;
+                gap: $small-gap;
+                padding-left: $small-padding;
+                border-left: 1px solid $prim-color-3;
+            }
+        }
+
+        &-placeholder {
+            min-width: 25rem;
+            max-width: 25rem;
+        }
+    }
+
+    &__box {
+        @include flex-space-between;
+        height: 100%;
+
+        &-editor {
+            @include flex-column;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
+
+            &-input {
+                @include shadow;
+                align-self: center;
+                margin: $medium-padding;
+                border: 1px solid $prim-color-3;
+                width: 55%;
+                height: 100%;
+                padding: 3.25rem;
+                outline: none;
+                resize: none;
+            }
+
+            &-choose {
+                @include flex-vertical;
+                justify-content: center;
+                gap: 25rem;
+                left: 0;
+                bottom: 0rem;
+                border-top: 1px solid $prim-color-3;
+                min-height: 2rem;
+                max-height: 2rem;
+                padding: $medium-padding;
+                width: 100%;
+                background-color: $prim-color-1;
+
+                &-headers {
+                    @include flex-vertical;
+                    gap: $small-gap;
+                }
+            }
+        }
+
+        &-suggestions {
+            padding: $medium-padding;
+            border-left: 1px solid $prim-color-3;
+            min-width: 25rem;
+            max-width: 25rem;
+            background-color: $prim-color-1;
+        }
+    }
+}

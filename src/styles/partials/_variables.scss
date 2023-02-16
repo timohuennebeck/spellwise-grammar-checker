@@ -2,8 +2,15 @@
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1280px;
 
-$prim-color-1: #000;
-$prim-color-2: #FFF;
+$prim-color-1: #fff;
+$prim-color-2: #f9f9fc;
+$prim-color-3: #e5e7eb;
+$prim-color-4: #000;
 
-$gap-default: 0.75rem;
-$padding-default: 0.75rem;
+$small-gap: 0.75rem;
+$medium-gap: 2.25rem;
+$large-gap: 4.5rem;
+
+$small-padding: 0.75rem;
+$medium-padding: 1.5rem;
+$large-padding: 2.25rem;

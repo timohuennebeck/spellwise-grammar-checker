@@ -1,19 +1,25 @@
 @use "./mixins" as *;
 
 @font-face {
-    font-family: "HK Guise";
+    font-family: "Roboto";
     font-weight: 400;
-    src: url(../../assets//fonts/HKGuiseRegular.otf);
+    src: url(../../assets//fonts/Roboto-Regular.ttf);
 }
 
 @font-face {
-    font-family: "HK Guise";
-    font-weight: 600;
-    src: url(../../assets/fonts/HKGuiseBold.otf);
+    font-family: "Roboto";
+    font-weight: 500;
+    src: url(../../assets/fonts/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: "Roboto";
+    font-weight: 700;
+    src: url(../../assets/fonts/Roboto-Bold.ttf);
 }
 
 * {
-    font-family: "HK Guise";
+    font-family: "Roboto";
 }
 
 h1 {
