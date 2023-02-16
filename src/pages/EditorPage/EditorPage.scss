@@ -3,6 +3,7 @@
 
 .editor-page {
     height: 100%;
+    position: relative;
 
     &__nav {
         @include flex-space-between;
@@ -46,11 +47,16 @@
                 align-self: center;
                 margin: $medium-padding;
                 border: 1px solid $prim-color-3;
+                min-width: 50rem;
                 width: 57.5%;
                 height: 100%;
                 padding: 3.25rem;
                 outline: none;
                 resize: none;
+
+                &-fade {
+                    opacity: 50%;
+                }
             }
 
             &-choose {
@@ -102,6 +108,7 @@
 
                 &-placeholder {
                     @include flex-column;
+                    gap: $small-gap;
                     align-items: center;
                     justify-content: center;
                     text-align: center;
@@ -110,8 +117,13 @@
                     &-header {
                         font-weight: 700;
                     }
+
+                    &-fade {
+                        opacity: 50%;
+                    }
                 }
             }
         }
     }
 }
+

@@ -3,6 +3,7 @@
 
 .editor-buttons {
     @include flex-vertical;
+    @include shadow;
     gap: $small-gap;
     border: 1px solid $prim-color-3;
     border-radius: 0.25rem;

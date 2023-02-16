@@ -1,0 +1,45 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.loading {
+    @include flex-vertical;
+    gap: $small-gap;
+    position: absolute;
+    padding: $small-padding;
+    border-radius: 0.25rem;
+    background-color: #f9ecfe;
+    top: -9%;
+    left: 50%;
+    transform: translate(-50%);
+    animation: fromTop 1.5s ease;
+
+    &__message {
+        font-weight: 500;
+        color: #8b0abe;
+    }
+
+    &__img {
+        width: 1.5rem;
+        height: 1.5rem;
+        animation: spin 2s infinite;
+    }
+}
+
+@keyframes fromTop {
+    from {
+        top: -100%;
+    }
+    to {
+        top: -9%;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

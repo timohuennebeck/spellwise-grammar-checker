@@ -9,14 +9,48 @@ import TextEditorButtons from "../../components/TextEditorButtons/TextEditorButt
 
 // images
 import checkImg from "../../assets/icons/check.svg";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import LoadingMessage from "../../components/LoadingMessage/LoadingMessage";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
     const [GPTResponse, setGPTResponse] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const highlightRef = useRef(null);
 
-    const handleRequest = (event) => {
+    const handleGPT = async (event) => {
+        const start = highlightRef.current.selectionStart;
+        const end = highlightRef.current.selectionEnd;
+        const highlightedText = highlightRef.current.value.substring(start, end);
+
+        if (!highlightedText) {
+            setErrorMessage(true);
+
+            setTimeout(() => {
+                setErrorMessage(false);
+            }, 3500);
+        } else {
+            const newMessage = `${event}: '${highlightedText}'`;
+
+            try {
+                setIsLoading(true);
+
+                const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
+                    message: newMessage,
+                });
+
+                setIsLoading(false);
+
+                setGPTResponse(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
+
+    const handleRequest = async (event) => {
         if (event.key === "Enter" && userInput.includes("//")) {
             // split the userInput string into an arr of lines
             const lines = userInput.split("\n");
@@ -25,47 +59,55 @@ export default function EditorPage() {
             const lineIndex = lines.findIndex((line) => line.includes("//"));
 
             if (lineIndex !== -1) {
-                // if a matching line is found
-                lines.splice(lineIndex, 1); // removes the line from the arr
+                const lineWithComment = lines[lineIndex];
+                console.log(lineWithComment);
 
-                // joins the remaining lines back into a single string
-                const updatedUserInput = lines.join("\n");
+                // extract the text content of the line, without the '//'
+                const prompt = lineWithComment.replace("//", "").trim();
 
-                // update the state with the new userInput string
-                setUserInput(updatedUserInput);
+                // call the API with the prompt
+                try {
+                    setIsLoading(true);
+
+                    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
+                        message: prompt,
+                    });
+
+                    setIsLoading(false);
+
+                    const responseData = data.map((item) => item);
+
+                    // insert the api response data right below the prompt line
+                    const updatedLines = [...lines];
+
+                    updatedLines.splice(lineIndex + 1, 0, "", ...responseData);
+
+                    // join the updated lines back into a single string
+                    const updatedUserInput = updatedLines.join("\n");
+
+                    // update the state with the new userInput string
+                    setUserInput(updatedUserInput);
+                } catch (error) {
+                    console.error(error);
+                }
             }
-        }
-    };
-
-    const handleGPT = async (event) => {
-        const start = highlightRef.current.selectionStart;
-        const end = highlightRef.current.selectionEnd;
-        const highlightedText = highlightRef.current.value.substring(start, end);
-
-        const newMessage = `${event}: '${highlightedText}'`;
-
-        try {
-            const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
-                message: newMessage,
-            });
-
-            setGPTResponse(data);
-        } catch (error) {
-            console.error(error);
         }
     };
 
     return (
         <div className="editor-page">
+            {isLoading && <LoadingMessage />}
+            {errorMessage && <ErrorMessage message="Error! Highlight text to continue..." />}
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
                     <TextEditorButtons name="Enhance" handleGPT={handleGPT} />
+                    <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
                     <div className="editor-page__nav-width-mood">
                         <TextEditorButtons name="Informal" handleGPT={handleGPT} />
                         <TextEditorButtons name="Formal" handleGPT={handleGPT} />
                     </div>
                     <div className="editor-page__nav-width-length">
-                        <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
+                        <TextEditorButtons name="Shorten" handleGPT={handleGPT} />
                         <TextEditorButtons name="Elaborate" handleGPT={handleGPT} />
                     </div>
                 </div>
@@ -113,6 +155,10 @@ export default function EditorPage() {
                                 So far, so good!
                             </span>
                             <p>Now, let’s dive deeper and see what alternatives are available.</p>
+                            <p className="editor-page__box-suggestions-content-placeholder-fade">
+                                P.S. Use // inline to create a customised prompt, i.e. '// what's
+                                the defintion of dog?'
+                            </p>
                         </div>
                     </div>
                 </div>

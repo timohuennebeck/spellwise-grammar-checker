@@ -4,6 +4,7 @@ import "./TextEditorButtons.scss";
 import React from "react";
 
 // icons and images
+import { ReactComponent as SummariseImg } from "../../assets/icons/summarise.svg";
 import { ReactComponent as InformalImg } from "../../assets/icons/informal.svg";
 import { ReactComponent as FormalImg } from "../../assets/icons/formal.svg";
 import { ReactComponent as EnhanceImg } from "../../assets/icons/enhance.svg";
@@ -15,26 +16,29 @@ export default function TextEditorButtons({ name, handleGPT }) {
     let inputMessage;
 
     switch (name) {
+        case "Summarise":
+            svgFile = <SummariseImg className="editor-buttons__img" />;
+            inputMessage = "Please, summarise the following snippet";
+            break;
         case "Informal":
             svgFile = <InformalImg className="editor-buttons__img" />;
-            inputMessage = "Make the followin snippet an informal tone and provide three examples";
+            inputMessage = "Please, make the following snippet an informal tone";
             break;
         case "Formal":
             svgFile = <FormalImg className="editor-buttons__img" />;
-            inputMessage = "Make the followin snippet a formal tone and provide three examples";
+            inputMessage = "Please, make the following snippet a formal tone";
             break;
-        case "Summarise":
+        case "Shorten":
             svgFile = <ShortenImg className="editor-buttons__img" />;
-            inputMessage = "Please, summarise the followin snippet and provide three examples";
+            inputMessage = "Please, shorten the following snippet";
             break;
         case "Elaborate":
             svgFile = <ExpandImg className="editor-buttons__img" />;
-            inputMessage = "Please, elaborate the followin snippet";
+            inputMessage = "Please, elaborate the following snippet";
             break;
         case "Enhance":
             svgFile = <EnhanceImg className="editor-buttons__img" />;
-            inputMessage =
-                "Please, rephrase the followin snippet to sound smarter and provide three examples";
+            inputMessage = "Please, rephrase the following snippet";
             break;
         default:
             svgFile = null;
