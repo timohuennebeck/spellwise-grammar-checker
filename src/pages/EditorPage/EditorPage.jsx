@@ -1,7 +1,8 @@
 import "./EditorPage.scss";
 
 // libraries
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import axios from "axios";
 
 // components
 import TextEditorButtons from "../../components/TextEditorButtons/TextEditorButtons";
@@ -11,7 +12,7 @@ import checkImg from "../../assets/icons/check.svg";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
-    const [currentHighlight, setCurrentHighlight] = useState("");
+    const [GPTResponse, setGPTResponse] = useState([]);
 
     const highlightRef = useRef(null);
 
@@ -36,16 +37,22 @@ export default function EditorPage() {
         }
     };
 
-    const handleSelection = () => {
+    const handleGPT = async (event) => {
         const start = highlightRef.current.selectionStart;
         const end = highlightRef.current.selectionEnd;
         const highlightedText = highlightRef.current.value.substring(start, end);
 
-        setCurrentHighlight(highlightedText);
-    };
+        const newMessage = `${event}: '${highlightedText}'`;
 
-    const handleGPT = (event) => {
-        console.log(event);
+        try {
+            const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
+                message: newMessage,
+            });
+
+            setGPTResponse(data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

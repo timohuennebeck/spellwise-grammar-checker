@@ -17,23 +17,24 @@ export default function TextEditorButtons({ name, handleGPT }) {
     switch (name) {
         case "Informal":
             svgFile = <InformalImg className="editor-buttons__img" />;
-            inputMessage = "Please, change the following to an informal tone:";
+            inputMessage = "Make the followin snippet an informal tone and provide three examples";
             break;
         case "Formal":
             svgFile = <FormalImg className="editor-buttons__img" />;
-            inputMessage = "Please, change the following to an formal tone:";
+            inputMessage = "Make the followin snippet a formal tone and provide three examples";
             break;
         case "Summarise":
             svgFile = <ShortenImg className="editor-buttons__img" />;
-            inputMessage = "Please, summarise the following:";
+            inputMessage = "Please, summarise the followin snippet and provide three examples";
             break;
         case "Elaborate":
             svgFile = <ExpandImg className="editor-buttons__img" />;
-            inputMessage = "Please, elaborate the following:";
+            inputMessage = "Please, elaborate the followin snippet";
             break;
         case "Enhance":
             svgFile = <EnhanceImg className="editor-buttons__img" />;
-            inputMessage = "Please, rephrase the following to sound smarter:";
+            inputMessage =
+                "Please, rephrase the followin snippet to sound smarter and provide three examples";
             break;
         default:
             svgFile = null;
