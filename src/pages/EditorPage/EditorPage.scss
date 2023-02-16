@@ -26,8 +26,8 @@
         }
 
         &-placeholder {
-            min-width: 25rem;
-            max-width: 25rem;
+            min-width: 27.5rem;
+            max-width: 27.5rem;
         }
     }
 
@@ -56,7 +56,6 @@
             &-choose {
                 @include flex-vertical;
                 justify-content: center;
-                gap: 25rem;
                 left: 0;
                 bottom: 0rem;
                 border-top: 1px solid $prim-color-3;
@@ -66,9 +65,20 @@
                 width: 100%;
                 background-color: $prim-color-1;
 
-                &-headers {
+                &-box {
                     @include flex-vertical;
-                    gap: $small-gap;
+                    justify-content: space-between;
+                    width: 50%;
+
+                    &-headers {
+                        @include flex-vertical;
+                        gap: $small-gap;
+                    }
+
+                    &-words {
+                        @include flex-vertical;
+                        gap: $small-gap;
+                    }
                 }
             }
         }
@@ -76,9 +86,14 @@
         &-suggestions {
             padding: $medium-padding;
             border-left: 1px solid $prim-color-3;
-            min-width: 25rem;
-            max-width: 25rem;
+            min-width: 27.5rem;
+            max-width: 27.5rem;
             background-color: $prim-color-1;
+
+            &-data {
+                font-size: 1.15rem;
+                font-weight: 700;
+            }
         }
     }
 }
