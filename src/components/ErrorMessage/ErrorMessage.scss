@@ -11,7 +11,7 @@
     top: -3.5rem;
     left: 50%;
     transform: translate(-50%);
-    animation: fromTop 2s ease;
+    animation: fromTop 2s ease-in-out;
 
     &__message {
         font-weight: 500;
@@ -25,6 +25,9 @@
 }
 
 @keyframes fromTop {
+    from {
+        top: -8.5rem;
+    }
     to {
         top: -3.5rem;
     }

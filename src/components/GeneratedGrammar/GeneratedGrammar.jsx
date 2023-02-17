@@ -14,7 +14,7 @@ export default function GeneratedGrammar() {
                 <span className="grammar__box-header">So far, so good!</span>
                 <p>Now, let’s dive deeper and see what alternatives are available.</p>
                 <p className="grammar__box-fade">
-                    P.S. Use // inline to create a customised prompt, i.e. '// what's the defintion
+                    P.S. Use // inline to create a customised prompt, i.e. '// what's the definition
                     of dog?'
                 </p>
             </div>

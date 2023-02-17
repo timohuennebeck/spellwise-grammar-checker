@@ -7,7 +7,7 @@ import React from "react";
 import { ReactComponent as SummariseImg } from "../../assets/icons/summarise.svg";
 import { ReactComponent as InformalImg } from "../../assets/icons/informal.svg";
 import { ReactComponent as FormalImg } from "../../assets/icons/formal.svg";
-import { ReactComponent as EnhanceImg } from "../../assets/icons/enhance.svg";
+import { ReactComponent as RephraseImg } from "../../assets/icons/rephrase.svg";
 import { ReactComponent as ShortenImg } from "../../assets/icons/shorten.svg";
 import { ReactComponent as ExpandImg } from "../../assets/icons/expand.svg";
 
@@ -32,12 +32,12 @@ export default function TextEditorButtons({ name, handleGPT }) {
             svgFile = <ShortenImg className="editor-buttons__img" />;
             inputMessage = "Please, shorten the following snippet";
             break;
-        case "Elaborate":
+        case "Expand":
             svgFile = <ExpandImg className="editor-buttons__img" />;
-            inputMessage = "Please, elaborate the following snippet";
+            inputMessage = "Please, expand the following snippet";
             break;
-        case "Enhance":
-            svgFile = <EnhanceImg className="editor-buttons__img" />;
+        case "Rephrase":
+            svgFile = <RephraseImg className="editor-buttons__img" />;
             inputMessage = "Please, rephrase the following snippet";
             break;
         default:

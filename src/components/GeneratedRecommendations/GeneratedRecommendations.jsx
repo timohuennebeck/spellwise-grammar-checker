@@ -25,7 +25,7 @@ export default function GeneratedRecommendations({ GPTResponse }) {
                     <p>Now, let’s dive deeper and see what alternatives are available.</p>
                     <p className="recommendations__box-fade">
                         P.S. Use // inline to create a customised prompt, i.e. '// what's the
-                        defintion of dog?'
+                        definition of dog?'
                     </p>
                 </div>
             )}

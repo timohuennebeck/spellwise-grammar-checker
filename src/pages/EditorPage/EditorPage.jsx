@@ -115,7 +115,7 @@ export default function EditorPage() {
             {errorMessage && <ErrorMessage message="Error! Highlight text to continue..." />}
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
-                    <TextEditorButtons name="Enhance" handleGPT={handleGPT} />
+                    <TextEditorButtons name="Rephrase" handleGPT={handleGPT} />
                     <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
                     <div className="editor-page__nav-width-mood">
                         <TextEditorButtons name="Informal" handleGPT={handleGPT} />
@@ -123,7 +123,7 @@ export default function EditorPage() {
                     </div>
                     <div className="editor-page__nav-width-length">
                         <TextEditorButtons name="Shorten" handleGPT={handleGPT} />
-                        <TextEditorButtons name="Elaborate" handleGPT={handleGPT} />
+                        <TextEditorButtons name="Expand" handleGPT={handleGPT} />
                     </div>
                 </div>
                 <div className="editor-page__nav-placeholder">

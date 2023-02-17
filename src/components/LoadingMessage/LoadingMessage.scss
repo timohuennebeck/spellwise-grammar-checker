@@ -7,15 +7,15 @@
     position: absolute;
     padding: $small-padding;
     border-radius: 0.25rem;
-    background-color: #F2ECFD;
-    top: -9%;
+    background-color: #f2ecfd;
+    top: -3.5rem;
     left: 50%;
     transform: translate(-50%);
-    animation: fromTop 1.5s ease;
+    animation: fromTop 2s ease-in-out;
 
     &__message {
         font-weight: 500;
-        color: #5E17EB;
+        color: #5e17eb;
     }
 
     &__img {
@@ -27,10 +27,10 @@
 
 @keyframes fromTop {
     from {
-        top: -100%;
+        top: -8.5rem;
     }
     to {
-        top: -9%;
+        top: -3.5rem;
     }
 }
 
