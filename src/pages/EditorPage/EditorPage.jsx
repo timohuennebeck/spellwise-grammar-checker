@@ -143,11 +143,11 @@ export default function EditorPage() {
                         />
                         <div className="editor-page__box-editor-input-items">
                             <TextEditorSidebarImage
-                                name="clipboard"
+                                name="Clipboard"
                                 onClick={() => navigator.clipboard.writeText(userInput)}
                             />
                             <TextEditorSidebarImage
-                                name={revealContent ? "grammar" : "suggestions"}
+                                name={revealContent ? "Grammar" : "Suggestions"}
                                 onClick={() => setRevealContent(!revealContent)}
                             />
                             {revealContent && (

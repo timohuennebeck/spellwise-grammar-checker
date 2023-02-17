@@ -2,20 +2,41 @@
 @use "../../styles/partials/mixins" as *;
 
 .sidebar {
-    @include flex;
-    @include shadow;
-    border: 1px solid $prim-color-3;
-    background-color: $prim-color-1;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
+    position: relative;
 
-    &:hover {
-        background-color: $prim-color-3;
-        cursor: pointer;
+    &__box {
+        @include flex;
+        @include shadow;
+        border: 1px solid $prim-color-3;
+        background-color: $prim-color-1;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+
+        &:hover {
+            background-color: $prim-color-3;
+            cursor: pointer;
+        }
+
+        &-svg {
+            width: 1rem;
+            height: 1rem;
+        }
     }
 
-    &__svg {
-        width: 1rem;
-        height: 1rem;
+    &__hover {
+        @include shadow;
+        position: absolute;
+        top: 0;
+        left: 2.75rem;
+        background-color: $prim-color-1;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        border: 1px solid $prim-color-3;
+
+        &-indv {
+            display: flex;
+            align-items: center;
+            height: 1rem;
+        }
     }
 }

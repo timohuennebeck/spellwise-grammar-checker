@@ -4,7 +4,8 @@
 .iterations {
     @include flex-column;
     gap: $small-gap;
-    
+    position: relative;
+
     &__current {
         @include flex;
         @include shadow;
@@ -38,5 +39,18 @@
                 background-color: $prim-color-3;
             }
         }
+    }
+
+    &__hover {
+        @include flex-vertical;
+        @include shadow;
+        position: absolute;
+        top: 0;
+        left: 2.75rem;
+        background-color: $prim-color-1;
+        border-radius: 0.25rem;
+        border: 1px solid $prim-color-3;
+        height: 2.15rem;
+        padding: 0.5rem;
     }
 }
