@@ -23,7 +23,8 @@ import LanguageDropdown from "../../components/LanguageDropdown/LanguageDropdown
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
     const [GPTResponse, setGPTResponse] = useState([]);
-    const [errorMessage, setErrorMessage] = useState(false);
+    const [toggleError, setToggleError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("Error!");
     const [isLoading, setIsLoading] = useState(false);
     const [revealContent, setRevealContent] = useState(false);
     const [iterations, setIterations] = useState(1);
@@ -37,10 +38,11 @@ export default function EditorPage() {
         const highlightedText = highlightRef.current.value.substring(start, end);
 
         if (!highlightedText) {
-            setErrorMessage(true);
+            setErrorMessage("Error! Higlight some text to continue.");
+            setToggleError(true);
 
             setTimeout(() => {
-                setErrorMessage(false);
+                setToggleError(false);
             }, 3500);
         } else {
             const message = `${event}: '${highlightedText}'`;
@@ -105,8 +107,16 @@ export default function EditorPage() {
 
                     // update the state with the new userInput string
                     setUserInput(updatedUserInput);
-                } catch (error) {
-                    console.error(error);
+                } catch {
+                    setIsLoading(false);
+                    setErrorMessage(
+                        "There has been an error on our side. Please, come back later."
+                    );
+                    setToggleError(true);
+
+                    setTimeout(() => {
+                        setToggleError(false);
+                    }, 3500);
                 }
             }
         }
@@ -115,7 +125,6 @@ export default function EditorPage() {
     const handleDeepL = async (languageCode) => {
         const start = highlightRef.current.selectionStart;
         const end = highlightRef.current.selectionEnd;
-        const highlightedText = highlightRef.current.value.substring(start, end);
 
         try {
             // replace line breaks with a unique separator string
@@ -140,15 +149,21 @@ export default function EditorPage() {
 
             // update the textarea value
             setUserInput(newText);
-        } catch (error) {
-            console.error(error);
+        } catch {
+            setIsLoading(false);
+            setErrorMessage("There has been an error on our side. Please, come back later.");
+            setToggleError(true);
+
+            setTimeout(() => {
+                setToggleError(false);
+            }, 3500);
         }
     };
 
     return (
         <div className="editor-page">
             {isLoading && <LoadingMessage />}
-            {errorMessage && <ErrorMessage message="Error! Highlight text to continue..." />}
+            {toggleError && <ErrorMessage message={errorMessage} />}
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
                     <TextEditorButtons name="Rephrase" handleGPT={handleGPT} />
