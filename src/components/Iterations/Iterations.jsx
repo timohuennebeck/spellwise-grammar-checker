@@ -14,7 +14,12 @@ export default function Iterations({ iterations, setIterations }) {
     });
 
     return (
-        <div className="iterations" onClick={() => setToggleDropdown(!toggleDropdown)}>
+        <div
+            className="iterations"
+            onMouseEnter={() => setToggleDropdown(true)}
+            onMouseLeave={() => setToggleDropdown(false)}
+            onClick={() => setToggleDropdown(false)}
+        >
             <p
                 className="iterations__current"
                 onMouseEnter={() => setHover(true)}

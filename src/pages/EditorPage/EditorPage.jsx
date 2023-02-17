@@ -31,11 +31,10 @@ export default function EditorPage() {
     const highlightRef = useRef(null);
 
     const handleGPT = async (event) => {
+        // find the start and end points of the highlighted data
         const start = highlightRef.current.selectionStart;
         const end = highlightRef.current.selectionEnd;
         const highlightedText = highlightRef.current.value.substring(start, end);
-
-        console.log(iterations);
 
         if (!highlightedText) {
             setErrorMessage(true);
@@ -49,12 +48,15 @@ export default function EditorPage() {
             try {
                 setIsLoading(true);
 
+                // prompt is the request that will be made and n the amount of items we will get back
                 const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
                     prompt: message,
                     n: iterations,
                 });
 
                 setIsLoading(false);
+
+                // shows either the grammar corrections or suggestions page
                 setRevealContent(true);
 
                 setGPTResponse(data);
@@ -110,7 +112,38 @@ export default function EditorPage() {
         }
     };
 
-    
+    const handleDeepL = async (languageCode) => {
+        const start = highlightRef.current.selectionStart;
+        const end = highlightRef.current.selectionEnd;
+        const highlightedText = highlightRef.current.value.substring(start, end);
+
+        try {
+            // replace line breaks with a unique separator string
+            const separator = "SEPARATOR_STRING";
+            const originalText = highlightRef.current.value.replace(/\n/g, separator);
+
+            const { data } = await axios.get(
+                `https://api-free.deepl.com/v2/translate?auth_key=${process.env.REACT_APP_DEEPL_KEY}&text=${originalText}&target_lang=${languageCode}`
+            );
+
+            // replace the separator string with line breaks in the translated text
+            const translatedText = data.translations[0].text.replace(
+                new RegExp(separator, "g"),
+                "\n"
+            );
+
+            // combine the translated text with the rest of the original text
+            const newText =
+                highlightRef.current.value.slice(0, start) +
+                translatedText +
+                highlightRef.current.value.slice(end);
+
+            // update the textarea value
+            setUserInput(newText);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className="editor-page">
@@ -153,7 +186,7 @@ export default function EditorPage() {
                                 name={revealContent ? "Grammar" : "Suggestions"}
                                 onClick={() => setRevealContent(!revealContent)}
                             />
-                            <LanguageDropdown />
+                            <LanguageDropdown handleDeepL={handleDeepL} />
                             {revealContent && (
                                 <Iterations iterations={iterations} setIterations={setIterations} />
                             )}
