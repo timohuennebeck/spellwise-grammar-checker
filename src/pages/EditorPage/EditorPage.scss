@@ -90,6 +90,11 @@
                     &-headers {
                         @include flex-vertical;
                         gap: $small-gap;
+
+                        &-indv {
+                            width: 1.15rem;
+                            height: 1.15rem;
+                        }
                     }
 
                     &-words {

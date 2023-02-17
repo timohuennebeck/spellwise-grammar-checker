@@ -14,6 +14,10 @@ import TextEditorSidebarImage from "../../components/TextEditorSidebarImage/Text
 import Iterations from "../../components/Iterations/Iterations";
 import GeneratedRecommendations from "../../components/GeneratedRecommendations/GeneratedRecommendations";
 import GeneratedGrammar from "../../components/GeneratedGrammar/GeneratedGrammar";
+import { ReactComponent as UnderlineImg } from "../../assets/icons/text-underline.svg";
+import { ReactComponent as HeadersImg } from "../../assets/icons/headers.svg";
+import { ReactComponent as BoldImg } from "../../assets/icons/text-bold.svg";
+import { ReactComponent as ItalicImg } from "../../assets/icons/text-italic.svg";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
@@ -154,10 +158,10 @@ export default function EditorPage() {
                     <div className="editor-page__box-editor-choose">
                         <div className="editor-page__box-editor-choose-box">
                             <div className="editor-page__box-editor-choose-box-headers">
-                                <p>H1</p>
-                                <p>H1</p>
-                                <p>H1</p>
-                                <p>H1</p>
+                                <HeadersImg className="editor-page__box-editor-choose-box-headers-indv" />
+                                <UnderlineImg className="editor-page__box-editor-choose-box-headers-indv" />
+                                <BoldImg className="editor-page__box-editor-choose-box-headers-indv" />
+                                <ItalicImg className="editor-page__box-editor-choose-box-headers-indv" />
                             </div>
                             <div className="editor-page__box-editor-choose-box-words">
                                 <p>

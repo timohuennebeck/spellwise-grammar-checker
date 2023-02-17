@@ -14,14 +14,14 @@ export default function Header() {
         <div className="header">
             <img className="header__logo" src={logoImg} alt="" />
             <nav className="header__nav">
-                {/* <div className="header__nav-chrome">
+                <div className="header__nav-chrome">
                     <img className="header__nav-chrome-logo" src={googleImg} alt="" />
                     <p className="header__nav-chrome-cta">Download Extension</p>
-                </div> */}
-                <div className="header__nav-upgrade">
+                </div>
+                {/* <div className="header__nav-upgrade">
                     <img className="header__nav-upgrade-logo" src={upgradeImg} alt="" />
                     <p className="header__nav-upgrade-cta">Upgrade</p>
-                </div>
+                </div> */}
                 <img className="header__nav-profile" src={profileImg} alt="" />
             </nav>
         </div>
