@@ -18,6 +18,7 @@ import { ReactComponent as UnderlineImg } from "../../assets/icons/text-underlin
 import { ReactComponent as HeadersImg } from "../../assets/icons/headers.svg";
 import { ReactComponent as BoldImg } from "../../assets/icons/text-bold.svg";
 import { ReactComponent as ItalicImg } from "../../assets/icons/text-italic.svg";
+import LanguageDropdown from "../../components/LanguageDropdown/LanguageDropdown";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
@@ -109,6 +110,8 @@ export default function EditorPage() {
         }
     };
 
+    
+
     return (
         <div className="editor-page">
             {isLoading && <LoadingMessage />}
@@ -150,6 +153,7 @@ export default function EditorPage() {
                                 name={revealContent ? "Grammar" : "Suggestions"}
                                 onClick={() => setRevealContent(!revealContent)}
                             />
+                            <LanguageDropdown />
                             {revealContent && (
                                 <Iterations iterations={iterations} setIterations={setIterations} />
                             )}
