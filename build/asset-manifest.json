@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a2be85d2.css",
+    "main.js": "/static/js/main.05953f25.js",
+    "static/js/787.7ad39630.chunk.js": "/static/js/787.7ad39630.chunk.js",
+    "static/media/google-chrome-logo.png": "/static/media/google-chrome-logo.5d29a0b3af2378daea0e.png",
+    "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "static/media/Poppins-Medium.ttf": "/static/media/Poppins-Medium.673ed42382ab264e0bf5.ttf",
+    "static/media/Poppins-Bold.ttf": "/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
+    "static/media/portrait.jpg": "/static/media/portrait.a6c923432047311ea92c.jpg",
+    "static/media/spellwise-logo.svg": "/static/media/spellwise-logo.d3ae0ec9cb0344506c27f5525d07d314.svg",
+    "static/media/grammar.svg": "/static/media/grammar.8dbe121e9d92460ecd2ac0c7aa98a46b.svg",
+    "static/media/summarise.svg": "/static/media/summarise.0939438e56159278f0f472262d5dfd19.svg",
+    "static/media/shorten.svg": "/static/media/shorten.f572644b705b353d963ca96707c8004c.svg",
+    "static/media/rephrase.svg": "/static/media/rephrase.222e4d62049cf556790d18bd1bd1aeb9.svg",
+    "static/media/formal.svg": "/static/media/formal.273907632641af491d68a95132e78197.svg",
+    "static/media/clipboard.svg": "/static/media/clipboard.06299ab0fcc376e1b3f0e4d8532d6b27.svg",
+    "static/media/headers.svg": "/static/media/headers.4b9e96be108b5eff2b4e85fda52d0758.svg",
+    "static/media/check.svg": "/static/media/check.fe5e74d1be184f275c762cd24dac9547.svg",
+    "static/media/informal.svg": "/static/media/informal.29b94b663fd8cc85230811f98111513c.svg",
+    "static/media/ai.svg": "/static/media/ai.acd91065425299db5b98c9ce09af91a3.svg",
+    "static/media/error.svg": "/static/media/error.99483f06960f11029d0c5f9f738d1197.svg",
+    "static/media/expand.svg": "/static/media/expand.0fdab82e03dfcec6a1fb29d8d7da634c.svg",
+    "static/media/loading.svg": "/static/media/loading.98f43458e51cf02c67b14a576cf82d16.svg",
+    "static/media/text-italic.svg": "/static/media/text-italic.8b9bca3887ea5b637115ad2bc42dc427.svg",
+    "static/media/text-bold.svg": "/static/media/text-bold.a075ce608be598cc1c32b2b558179521.svg",
+    "index.html": "/index.html",
+    "static/media/text-underline.svg": "/static/media/text-underline.36ed47bc44dbb140f8bcda9525db47be.svg",
+    "static/media/upgrade.svg": "/static/media/upgrade.4d37784db2a08f9aa0ee8a66c4fd7a80.svg",
+    "main.a2be85d2.css.map": "/static/css/main.a2be85d2.css.map",
+    "main.05953f25.js.map": "/static/js/main.05953f25.js.map",
+    "787.7ad39630.chunk.js.map": "/static/js/787.7ad39630.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2be85d2.css",
+    "static/js/main.05953f25.js"
+  ]
+}
