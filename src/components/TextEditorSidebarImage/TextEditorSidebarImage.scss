@@ -1,0 +1,21 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.sidebar {
+    @include flex;
+    @include shadow;
+    border: 1px solid $prim-color-3;
+    background-color: $prim-color-1;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    &:hover {
+        background-color: $prim-color-3;
+        cursor: pointer;
+    }
+
+    &__svg {
+        width: 1rem;
+        height: 1rem;
+    }
+}

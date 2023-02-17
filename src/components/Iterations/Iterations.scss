@@ -1,0 +1,42 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.iterations {
+    @include flex-column;
+    gap: $small-gap;
+    
+    &__current {
+        @include flex;
+        @include shadow;
+        width: 2.15rem;
+        height: 2.15rem;
+        background-color: $prim-color-1;
+        border-radius: 0.25rem;
+        border: 1px solid $prim-color-3;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $prim-color-3;
+        }
+    }
+
+    &__box {
+        @include flex-column;
+        gap: $small-gap;
+
+        &-indv {
+            @include flex;
+            @include shadow;
+            width: 2.15rem;
+            height: 2.15rem;
+            background-color: $prim-color-1;
+            border-radius: 0.25rem;
+            border: 1px solid $prim-color-3;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $prim-color-3;
+            }
+        }
+    }
+}

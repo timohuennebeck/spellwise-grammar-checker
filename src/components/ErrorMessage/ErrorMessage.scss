@@ -8,10 +8,10 @@
     padding: $small-padding;
     border-radius: 0.25rem;
     background-color: #feecef;
-    top: -9%;
+    top: -3.5rem;
     left: 50%;
     transform: translate(-50%);
-    animation: fromTop 1.5s ease;
+    animation: fromTop 2s ease;
 
     &__message {
         font-weight: 500;
@@ -25,10 +25,7 @@
 }
 
 @keyframes fromTop {
-    from {
-        top: -100%;
-    }
     to {
-        top: -9%;
+        top: -3.5rem;
     }
 }

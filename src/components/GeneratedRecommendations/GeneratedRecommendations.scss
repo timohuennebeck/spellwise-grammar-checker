@@ -1,0 +1,44 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.recommendations {
+    @include flex-column;
+    gap: $small-gap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+
+    &__ai {
+        @include flex-column;
+        gap: $small-gap;
+        width: 100%;
+        padding-top: $medium-padding;
+        overflow: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__box {
+        @include flex-column;
+        gap: $small-gap;
+        align-items: center;
+        width: 75%;
+
+        &-header {
+            font-weight: 700;
+        }
+
+        &-fade {
+            opacity: 50%;
+        }
+    }
+}
+
+.remove-defaults {
+    align-items: flex-start;
+    text-align: start;
+    justify-content: flex-start;
+}

@@ -35,6 +35,7 @@
     &__box {
         @include flex-space-between;
         height: 100%;
+        position: relative;
 
         &-editor {
             @include flex-column;
@@ -44,18 +45,28 @@
 
             &-input {
                 @include shadow;
+                position: relative;
                 align-self: center;
                 margin: $medium-padding;
-                border: 1px solid $prim-color-3;
                 min-width: 50rem;
                 width: 57.5%;
                 height: 100%;
-                padding: 3.25rem;
-                outline: none;
-                resize: none;
 
-                &-fade {
-                    opacity: 50%;
+                &-textarea {
+                    border: 1px solid $prim-color-3;
+                    outline: none;
+                    resize: none;
+                    height: 100%;
+                    width: 100%;
+                    padding: 3.25rem;
+                }
+
+                &-items {
+                    @include flex-column;
+                    gap: $small-gap;
+                    position: absolute;
+                    top: 1rem;
+                    right: -1rem;
                 }
             }
 
@@ -99,31 +110,6 @@
             &-data {
                 font-weight: 500;
             }
-
-            &-content {
-                @include flex-column;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-
-                &-placeholder {
-                    @include flex-column;
-                    gap: $small-gap;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    width: 75%;
-
-                    &-header {
-                        font-weight: 700;
-                    }
-
-                    &-fade {
-                        opacity: 50%;
-                    }
-                }
-            }
         }
     }
 }
-

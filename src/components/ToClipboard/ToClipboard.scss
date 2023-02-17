@@ -1,0 +1,25 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.clipboard {
+    @include flex-column;
+    @include shadow;
+    gap: $small-gap;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: #f9ecfe;
+    padding: $small-padding;
+    border-radius: 0.25rem;
+    width: 100%;
+
+    &__svg {
+        cursor: pointer;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__text {
+        white-space: pre-wrap;
+        font-size: 0.875rem;
+    }
+}

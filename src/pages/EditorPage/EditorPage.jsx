@@ -8,15 +8,20 @@ import axios from "axios";
 import TextEditorButtons from "../../components/TextEditorButtons/TextEditorButtons";
 
 // images
-import checkImg from "../../assets/icons/check.svg";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import LoadingMessage from "../../components/LoadingMessage/LoadingMessage";
+import TextEditorSidebarImage from "../../components/TextEditorSidebarImage/TextEditorSidebarImage";
+import Iterations from "../../components/Iterations/Iterations";
+import GeneratedRecommendations from "../../components/GeneratedRecommendations/GeneratedRecommendations";
+import GeneratedGrammar from "../../components/GeneratedGrammar/GeneratedGrammar";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
     const [GPTResponse, setGPTResponse] = useState([]);
     const [errorMessage, setErrorMessage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [revealContent, setRevealContent] = useState(false);
+    const [iterations, setIterations] = useState(1);
 
     const highlightRef = useRef(null);
 
@@ -25,6 +30,8 @@ export default function EditorPage() {
         const end = highlightRef.current.selectionEnd;
         const highlightedText = highlightRef.current.value.substring(start, end);
 
+        console.log(iterations);
+
         if (!highlightedText) {
             setErrorMessage(true);
 
@@ -32,16 +39,18 @@ export default function EditorPage() {
                 setErrorMessage(false);
             }, 3500);
         } else {
-            const newMessage = `${event}: '${highlightedText}'`;
+            const message = `${event}: '${highlightedText}'`;
 
             try {
                 setIsLoading(true);
 
                 const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
-                    message: newMessage,
+                    prompt: message,
+                    n: iterations,
                 });
 
                 setIsLoading(false);
+                setRevealContent(true);
 
                 setGPTResponse(data);
             } catch (error) {
@@ -60,7 +69,6 @@ export default function EditorPage() {
 
             if (lineIndex !== -1) {
                 const lineWithComment = lines[lineIndex];
-                console.log(lineWithComment);
 
                 // extract the text content of the line, without the '//'
                 const prompt = lineWithComment.replace("//", "").trim();
@@ -69,18 +77,21 @@ export default function EditorPage() {
                 try {
                     setIsLoading(true);
 
-                    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
-                        message: prompt,
-                    });
+                    const { data } = await axios.post(
+                        `${process.env.REACT_APP_API_URL}/openai-slash`,
+                        {
+                            prompt: prompt,
+                        }
+                    );
 
                     setIsLoading(false);
 
-                    const responseData = data.map((item) => item);
-
-                    // insert the api response data right below the prompt line
+                    // remove the "//" line from the lines array
                     const updatedLines = [...lines];
+                    updatedLines.splice(lineIndex, 1);
 
-                    updatedLines.splice(lineIndex + 1, 0, "", ...responseData);
+                    // add the GPT response as a new line after the "//" line
+                    updatedLines.splice(lineIndex, 0, data);
 
                     // join the updated lines back into a single string
                     const updatedUserInput = updatedLines.join("\n");
@@ -117,14 +128,29 @@ export default function EditorPage() {
             </nav>
             <div className="editor-page__box">
                 <div className="editor-page__box-editor">
-                    <textarea
-                        ref={highlightRef}
-                        className="editor-page__box-editor-input"
-                        placeholder="Write or paste text here..."
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        onKeyDown={handleRequest}
-                    />
+                    <div className="editor-page__box-editor-input">
+                        <textarea
+                            ref={highlightRef}
+                            className="editor-page__box-editor-input-textarea"
+                            placeholder="Write or paste text here..."
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            onKeyDown={handleRequest}
+                        />
+                        <div className="editor-page__box-editor-input-items">
+                            <TextEditorSidebarImage
+                                name="clipboard"
+                                onClick={() => navigator.clipboard.writeText(userInput)}
+                            />
+                            <TextEditorSidebarImage
+                                name={revealContent ? "grammar" : "suggestions"}
+                                onClick={() => setRevealContent(!revealContent)}
+                            />
+                            {revealContent && (
+                                <Iterations iterations={iterations} setIterations={setIterations} />
+                            )}
+                        </div>
+                    </div>
                     <div className="editor-page__box-editor-choose">
                         <div className="editor-page__box-editor-choose-box">
                             <div className="editor-page__box-editor-choose-box-headers">
@@ -143,24 +169,14 @@ export default function EditorPage() {
                     </div>
                 </div>
                 <div className="editor-page__box-suggestions">
-                    <span className="editor-page__box-suggestions-data">Your Recommendations</span>
-                    <div className="editor-page__box-suggestions-content">
-                        <div className="editor-page__box-suggestions-content-placeholder">
-                            <img
-                                className="editor-page__box-suggestions-content-placeholder-img"
-                                src={checkImg}
-                                alt=""
-                            />
-                            <span className="editor-page__box-suggestions-content-placeholder-header">
-                                So far, so good!
-                            </span>
-                            <p>Now, let’s dive deeper and see what alternatives are available.</p>
-                            <p className="editor-page__box-suggestions-content-placeholder-fade">
-                                P.S. Use // inline to create a customised prompt, i.e. '// what's
-                                the defintion of dog?'
-                            </p>
-                        </div>
-                    </div>
+                    <span className="editor-page__box-suggestions-data">
+                        {revealContent ? "Your Suggestions" : "Grammar Corrections"}
+                    </span>
+                    {revealContent ? (
+                        <GeneratedRecommendations GPTResponse={GPTResponse} />
+                    ) : (
+                        <GeneratedGrammar />
+                    )}
                 </div>
             </div>
         </div>
