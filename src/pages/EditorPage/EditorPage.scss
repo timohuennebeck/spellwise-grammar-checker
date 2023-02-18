@@ -87,10 +87,6 @@
                 background-color: $prim-color-1;
 
                 &-box {
-                    @include flex-vertical;
-                    justify-content: space-between;
-                    width: 50%;
-
                     &-headers {
                         @include flex-vertical;
                         gap: $small-gap;

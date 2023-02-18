@@ -308,12 +308,12 @@ export default function EditorPage() {
                     </div>
                     <div className="editor-page__box-editor-choose">
                         <div className="editor-page__box-editor-choose-box">
-                            <div className="editor-page__box-editor-choose-box-headers">
+                            {/* <div className="editor-page__box-editor-choose-box-headers">
                                 <HeadersImg className="editor-page__box-editor-choose-box-headers-indv" />
                                 <UnderlineImg className="editor-page__box-editor-choose-box-headers-indv" />
                                 <BoldImg className="editor-page__box-editor-choose-box-headers-indv" />
                                 <ItalicImg className="editor-page__box-editor-choose-box-headers-indv" />
-                            </div>
+                            </div> */}
                             <div className="editor-page__box-editor-choose-box-words">
                                 <p>
                                     {userInput.split(" ").length - 1} Words (
