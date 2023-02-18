@@ -1,6 +1,10 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+.highlight {
+    background-color: yellow;
+}
+
 .editor-page {
     height: 100%;
     position: relative;

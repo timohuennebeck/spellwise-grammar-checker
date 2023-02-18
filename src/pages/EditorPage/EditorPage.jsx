@@ -1,7 +1,7 @@
 import "./EditorPage.scss";
 
 // libraries
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 // components
@@ -19,6 +19,7 @@ import { ReactComponent as HeadersImg } from "../../assets/icons/headers.svg";
 import { ReactComponent as BoldImg } from "../../assets/icons/text-bold.svg";
 import { ReactComponent as ItalicImg } from "../../assets/icons/text-italic.svg";
 import LanguageDropdown from "../../components/LanguageDropdown/LanguageDropdown";
+import LoadingGrammar from "../../components/LoadingGrammar/LoadingGrammar";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
@@ -28,8 +29,104 @@ export default function EditorPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [revealContent, setRevealContent] = useState(false);
     const [iterations, setIterations] = useState(1);
+    const [lastSentence, setLastSentence] = useState("");
+    const [grammarErrors, setGrammarErrors] = useState([]);
+    const [loadingGrammar, setLoadingGrammar] = useState(false);
 
     const highlightRef = useRef(null);
+
+    // Add an event listener to the text area to detect when the user finishes writing a sentence
+    useEffect(() => {
+        const handleKeyUp = (event) => {
+            // Check if the key pressed is a period, exclamation point, or question mark
+            if (event.key === "." || event.key === "!" || event.key === "?") {
+                // Get the text in the text area
+                const text = highlightRef.current.value;
+
+                // Get the last sentence in the text
+                const sentences = text.split(/(?<=[.?!])\s+/);
+                const last = sentences[sentences.length - 1];
+
+                // Check if the last sentence is different from the previous one
+                if (last !== lastSentence) {
+                    setLastSentence(last);
+                }
+            }
+        };
+
+        const element = highlightRef.current;
+
+        if (element) {
+            element.addEventListener("keyup", handleKeyUp);
+
+            return () => {
+                element.removeEventListener("keyup", handleKeyUp);
+            };
+        }
+    }, [lastSentence]);
+
+    // Check the grammar of the last sentence when it changes
+    useEffect(() => {
+        if (lastSentence) {
+            axios
+                .post(`${process.env.REACT_APP_API_URL}/openai-edit`, {
+                    prompt: lastSentence,
+                })
+                .then((response) => {
+                    setGrammarErrors([...grammarErrors, [response.data]]);
+                })
+                .catch(() => {
+                    setIsLoading(false);
+                    setErrorMessage(
+                        "There has been an error on our side. Please, come back later."
+                    );
+                    setToggleError(true);
+
+                    setTimeout(() => {
+                        setToggleError(false);
+                    }, 2500);
+                });
+        }
+    }, [lastSentence]);
+
+    const handleGrammar = () => {
+        // find the start and end points of the highlighted data
+        const start = highlightRef.current.selectionStart;
+        const end = highlightRef.current.selectionEnd;
+        const highlightedText = highlightRef.current.value.substring(start, end);
+
+        if (!highlightedText) {
+            setErrorMessage("Error! Higlight some text to continue.");
+            setToggleError(true);
+
+            setTimeout(() => {
+                setToggleError(false);
+            }, 3500);
+        } else {
+            setLoadingGrammar(true);
+
+            axios
+                .post(`${process.env.REACT_APP_API_URL}/openai-edit`, {
+                    prompt: userInput,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    setLoadingGrammar(false);
+                    setGrammarErrors([...grammarErrors, [response.data]]);
+                })
+                .catch((error) => {
+                    setIsLoading(false);
+                    setErrorMessage(
+                        "There has been an error on our side. Please, come back later."
+                    );
+                    setToggleError(true);
+
+                    setTimeout(() => {
+                        setToggleError(false);
+                    }, 2500);
+                });
+        }
+    };
 
     const handleGPT = async (event) => {
         // find the start and end points of the highlighted data
@@ -164,8 +261,10 @@ export default function EditorPage() {
         <div className="editor-page">
             {isLoading && <LoadingMessage />}
             {toggleError && <ErrorMessage message={errorMessage} />}
+            {loadingGrammar && <LoadingGrammar />}
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
+                    <TextEditorButtons name="Fix Grammar" handleGrammar={handleGrammar} />
                     <TextEditorButtons name="Rephrase" handleGPT={handleGPT} />
                     <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
                     <div className="editor-page__nav-width-mood">
@@ -231,7 +330,7 @@ export default function EditorPage() {
                     {revealContent ? (
                         <GeneratedRecommendations GPTResponse={GPTResponse} />
                     ) : (
-                        <GeneratedGrammar />
+                        <GeneratedGrammar grammarErrors={grammarErrors} />
                     )}
                 </div>
             </div>

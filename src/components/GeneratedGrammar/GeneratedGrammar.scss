@@ -9,22 +9,17 @@
     text-align: center;
     height: 100%;
 
-    // &__ai {
-    //     @include flex-column;
-    //     gap: $medium-gap;
-    //     height: 100%;
+    &__ai {
+        @include flex-column;
+        gap: $small-gap;
+        width: 100%;
+        padding-top: $medium-padding;
+        overflow: scroll;
 
-    //     &-indv {
-    //         @include flex-column;
-    //         gap: $small-gap;
-    //         padding-top: $medium-padding;
-    //         overflow: scroll;
-
-    //         &::-webkit-scrollbar {
-    //             display: none;
-    //         }
-    //     }
-    // }
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 
     &__box {
         @include flex-column;
@@ -40,4 +35,10 @@
             opacity: 50%;
         }
     }
+}
+
+.remove-defaults {
+    align-items: flex-start;
+    text-align: start;
+    justify-content: flex-start;
 }
