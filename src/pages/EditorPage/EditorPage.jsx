@@ -107,14 +107,13 @@ export default function EditorPage() {
 
             axios
                 .post(`${process.env.REACT_APP_API_URL}/openai-edit`, {
-                    prompt: userInput,
+                    prompt: highlightedText,
                 })
                 .then((response) => {
-                    console.log(response.data);
                     setLoadingGrammar(false);
                     setGrammarErrors([...grammarErrors, [response.data]]);
                 })
-                .catch((error) => {
+                .catch(() => {
                     setIsLoading(false);
                     setErrorMessage(
                         "There has been an error on our side. Please, come back later."
