@@ -14,10 +14,6 @@ import TextEditorSidebarImage from "../../components/TextEditorSidebarImage/Text
 import Iterations from "../../components/Iterations/Iterations";
 import GeneratedRecommendations from "../../components/GeneratedRecommendations/GeneratedRecommendations";
 import GeneratedGrammar from "../../components/GeneratedGrammar/GeneratedGrammar";
-import { ReactComponent as UnderlineImg } from "../../assets/icons/text-underline.svg";
-import { ReactComponent as HeadersImg } from "../../assets/icons/headers.svg";
-import { ReactComponent as BoldImg } from "../../assets/icons/text-bold.svg";
-import { ReactComponent as ItalicImg } from "../../assets/icons/text-italic.svg";
 import LanguageDropdown from "../../components/LanguageDropdown/LanguageDropdown";
 import LoadingGrammar from "../../components/LoadingGrammar/LoadingGrammar";
 
@@ -38,16 +34,16 @@ export default function EditorPage() {
     // Add an event listener to the text area to detect when the user finishes writing a sentence
     useEffect(() => {
         const handleKeyUp = (event) => {
-            // Check if the key pressed is a period, exclamation point, or question mark
+            // check if the last element pressed is a period, exclamation point, or question mark
             if (event.key === "." || event.key === "!" || event.key === "?") {
-                // Get the text in the text area
+                // get the text in the text area
                 const text = highlightRef.current.value;
 
-                // Get the last sentence in the text
+                // get the last sentence in the text
                 const sentences = text.split(/(?<=[.?!])\s+/);
                 const last = sentences[sentences.length - 1];
 
-                // Check if the last sentence is different from the previous one
+                // check if the last sentence is different from the previous one
                 if (last !== lastSentence) {
                     setLastSentence(last);
                 }
@@ -65,8 +61,9 @@ export default function EditorPage() {
         }
     }, [lastSentence]);
 
-    // Check the grammar of the last sentence when it changes
+    // checks the grammar of the last sentence when it changes and edits it using openai's gpt3
     useEffect(() => {
+        // if the last sentence has a value, make a request to the backend
         if (lastSentence) {
             axios
                 .post(`${process.env.REACT_APP_API_URL}/openai-edit`, {
@@ -82,6 +79,7 @@ export default function EditorPage() {
                     );
                     setToggleError(true);
 
+                    // resets the error message after 2.5 seconds
                     setTimeout(() => {
                         setToggleError(false);
                     }, 2500);
@@ -133,6 +131,7 @@ export default function EditorPage() {
         const end = highlightRef.current.selectionEnd;
         const highlightedText = highlightRef.current.value.substring(start, end);
 
+        // if there is no highlighted text, show an error message
         if (!highlightedText) {
             setErrorMessage("Error! Higlight some text to continue.");
             setToggleError(true);
@@ -146,7 +145,7 @@ export default function EditorPage() {
             try {
                 setIsLoading(true);
 
-                // prompt is the request that will be made and n the amount of items we will get back
+                // makes a request to the backend to get the gpt3 response
                 const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/openai`, {
                     prompt: message,
                     n: iterations,
@@ -178,7 +177,7 @@ export default function EditorPage() {
                 // extract the text content of the line, without the '//'
                 const prompt = lineWithComment.replace("//", "").trim();
 
-                // call the API with the prompt
+                // call the api with the prompt
                 try {
                     setIsLoading(true);
 
@@ -191,11 +190,11 @@ export default function EditorPage() {
 
                     setIsLoading(false);
 
-                    // remove the "//" line from the lines array
+                    // remove the "//" line from the lines arr
                     const updatedLines = [...lines];
                     updatedLines.splice(lineIndex, 1);
 
-                    // add the GPT response as a new line after the "//" line
+                    // add the api response as a new line after the "//" line
                     updatedLines.splice(lineIndex, 0, data);
 
                     // join the updated lines back into a single string
@@ -219,6 +218,7 @@ export default function EditorPage() {
     };
 
     const handleDeepL = async (languageCode) => {
+        // find the start and end points of the highlighted data
         const start = highlightRef.current.selectionStart;
         const end = highlightRef.current.selectionEnd;
 

@@ -21,6 +21,7 @@ export default function LanguageDropdown({ handleDeepL }) {
     const [hover, setHover] = useState(false);
     const [toggleDropdown, setToggleDropdown] = useState(false);
 
+    //arr of all flags and language codes used for translation
     const allFlags = [
         { flag: <EnImg className="languages__hover-box-svg" />, languageCode: "EN" },
         { flag: <DeImg className="languages__hover-box-svg" />, languageCode: "DE" },
@@ -49,6 +50,7 @@ export default function LanguageDropdown({ handleDeepL }) {
             >
                 <LanguagesImg className="languages__box-svg" />
             </div>
+            {/* if toggledropdown is enabled activate the dropdown */}
             {toggleDropdown && (
                 <div className="languages__hover">
                     {allFlags.map((item) => {

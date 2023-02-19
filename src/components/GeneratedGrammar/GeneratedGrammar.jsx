@@ -11,6 +11,7 @@ import GrammarError from "../GrammarError/GrammarError";
 
 export default function GeneratedGrammar({ grammarErrors }) {
     return (
+        // if there are grammar errors, show the grammar errors, otherwise show the default message
         <div className={`grammar ${grammarErrors.length !== 0 && "remove-defaults"}`}>
             {grammarErrors.length !== 0 ? (
                 <div className="grammar__ai">

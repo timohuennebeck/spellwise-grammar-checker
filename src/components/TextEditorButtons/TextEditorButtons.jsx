@@ -16,6 +16,7 @@ export default function TextEditorButtons({ name, handleGrammar, handleGPT }) {
     let svgFile;
     let callFunction;
 
+    // switch statement to determine which icon to show and what the api call should do
     switch (name) {
         case "Fix Grammar":
             svgFile = <FixGrammarImg className="editor-buttons__img" />;

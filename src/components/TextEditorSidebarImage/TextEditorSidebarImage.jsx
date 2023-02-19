@@ -13,6 +13,7 @@ export default function TextEditorSidebarImage({ name, onClick }) {
 
     let sidebarItem;
 
+    // switch statement to determine which icon to show
     switch (name) {
         case "Clipboard":
             sidebarItem = <ClipboardImg className="sidebar__box-svg" />;

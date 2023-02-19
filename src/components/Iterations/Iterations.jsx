@@ -7,8 +7,10 @@ export default function Iterations({ iterations, setIterations }) {
     const [toggleDropdown, setToggleDropdown] = useState(false);
     const [hover, setHover] = useState(false);
 
+    // arr of numbers to iterate through
     const allNumbers = [{ amount: 1 }, { amount: 2 }, { amount: 3 }, { amount: 4 }, { amount: 5 }];
 
+    // filter out the current iteration
     const filteredNumbers = allNumbers.filter((item) => {
         return item.amount !== iterations;
     });
