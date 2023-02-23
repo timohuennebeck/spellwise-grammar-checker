@@ -27,6 +27,11 @@
         align-items: center;
         width: 75%;
 
+        &-img {
+            width: 7.5rem;
+            height: 7.5rem;
+        }
+
         &-header {
             font-weight: 700;
         }

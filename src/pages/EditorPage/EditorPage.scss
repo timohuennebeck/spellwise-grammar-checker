@@ -11,22 +11,21 @@
 
     &__nav {
         @include flex-space-between;
-        background-color: $prim-color-1;
+        background-color: $prim-color-2;
         border-bottom: 1px solid $prim-color-3;
         padding: $small-padding;
 
         &-width {
             @include flex-vertical;
-            justify-content: center;
             gap: $small-gap;
             width: 100%;
 
-            &-mood,
-            &-length {
+            &-section {
                 @include flex-vertical;
                 gap: $small-gap;
-                padding-left: $small-padding;
                 border-left: 1px solid $prim-color-3;
+                padding-left: $small-padding;
+                height: 75%;
             }
         }
 
@@ -42,65 +41,22 @@
         position: relative;
 
         &-editor {
-            @include flex-column;
-            justify-content: space-between;
             height: 100%;
             width: 100%;
 
             &-input {
-                @include shadow;
                 position: relative;
                 align-self: center;
-                margin: $medium-padding;
                 min-width: 50rem;
-                width: 57.5%;
                 height: 100%;
 
                 &-textarea {
-                    border: 1px solid $prim-color-3;
+                    border: none;
                     outline: none;
                     resize: none;
                     height: 100%;
                     width: 100%;
                     padding: 3.25rem;
-                }
-
-                &-items {
-                    @include flex-column;
-                    gap: $small-gap;
-                    position: absolute;
-                    top: 1rem;
-                    right: -1rem;
-                }
-            }
-
-            &-choose {
-                @include flex-vertical;
-                justify-content: center;
-                left: 0;
-                bottom: 0rem;
-                border-top: 1px solid $prim-color-3;
-                min-height: 2rem;
-                max-height: 2rem;
-                padding: $medium-padding;
-                width: 100%;
-                background-color: $prim-color-1;
-
-                &-box {
-                    &-headers {
-                        @include flex-vertical;
-                        gap: $small-gap;
-
-                        &-indv {
-                            width: 1.15rem;
-                            height: 1.15rem;
-                        }
-                    }
-
-                    &-words {
-                        @include flex-vertical;
-                        gap: $small-gap;
-                    }
                 }
             }
         }

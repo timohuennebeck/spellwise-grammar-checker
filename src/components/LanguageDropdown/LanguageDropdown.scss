@@ -2,69 +2,72 @@
 @use "../../styles/partials/variables" as *;
 
 .languages {
-    @include flex-column;
+    @include flex-vertical;
+    @include shadow;
     gap: $small-gap;
-    position: relative;
+    position: absolute;
+    background-color: $prim-color-1;
+    padding: 0.5rem;
+    border-radius: 50rem;
+    top: 1rem;
+    left: 1rem;
+    border: 1px solid $prim-color-3;
 
-    &__box {
-        @include flex;
-        @include shadow;
-        background-color: $prim-color-1;
-        border-radius: 0.25rem;
-        padding: 0.5rem;
-        border: 1px solid $prim-color-3;
-
-        &:hover {
-            cursor: pointer;
-            background-color: $prim-color-3;
-        }
-
-        &-svg {
-            width: 1rem;
-            height: 1rem;
-        }
+    &:hover {
+        cursor: pointer;
     }
 
-    &__hover {
-        @include flex-column;
-        gap: $small-gap;
-        max-height: 13.75rem;
-        overflow: scroll;
+    &__flags {
+        @include flex-vertical;
+        position: relative;
 
-        &::-webkit-scrollbar {
-            display: none;
+        &-current {
+            width: 1.75rem;
+            height: 1.75rem;
         }
 
-        &-box {
-            @include flex;
+        &-hover {
+            @include flex-column;
             @include shadow;
-            background-color: $prim-color-1;
-            border-radius: 0.25rem;
-            padding: 0.5rem;
+            padding: 0.25rem;
+            border-radius: 10rem;
+            position: absolute;
+            top: 3.25rem;
+            left: -0.75rem;
             border: 1px solid $prim-color-3;
 
-            &:hover {
-                cursor: pointer;
-                background-color: $prim-color-3;
-            }
+            &-item {
+                @include flex-vertical;
+                padding: 0.5rem;
+                border-radius: 50%;
+                background-color: $prim-color-1;
 
-            &-svg {
-                width: 1rem;
-                height: 1rem;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #f2ecfd;
+                }
+
+                &-indv {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                }
             }
         }
     }
 
-    &__reveal {
-        @include flex-vertical;
-        @include shadow;
-        position: absolute;
-        top: 0;
-        left: 2.75rem;
-        background-color: $prim-color-1;
-        border-radius: 0.25rem;
-        border: 1px solid $prim-color-3;
-        height: 2.15rem;
-        padding: 0.5rem;
+    &__align {
+        width: 1.25rem;
+        height: 1.25rem;
+        opacity: 50%;
     }
+
+    &__triangle {
+        width: 0.425em;
+        height: 0.425em;
+        opacity: 50%;
+    }
+}
+
+.flip {
+    transform: rotate(180deg);
 }

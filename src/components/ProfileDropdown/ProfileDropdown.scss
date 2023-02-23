@@ -1,0 +1,64 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.profile-dropdown {
+    position: relative;
+    border-radius: 0.25rem;
+
+    &__nav {
+        @include flex-vertical;
+        gap: 1rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &-img {
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        &-triangle {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+    }
+
+    &__list {
+        @include flex-column;
+        @include shadow;
+        position: absolute;
+        z-index: 1;
+        white-space: nowrap;
+        background-color: $prim-color-1;
+        border: 0.5px solid $prim-color-3;
+        list-style: none;
+        font-size: 0.875rem;
+        top: 3rem;
+        right: 0;
+
+        &-name {
+            border-bottom: 1px solid $prim-color-3;
+
+            &-plan {
+                @include flex-vertical;
+                gap: $small-gap;
+
+                &-upgrade {
+                    color: #5e17eb;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
+
+.profile-hover {
+    padding: $small-padding $medium-padding;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+}

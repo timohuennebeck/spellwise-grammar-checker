@@ -16,6 +16,7 @@ import GeneratedRecommendations from "../../components/GeneratedRecommendations/
 import GeneratedGrammar from "../../components/GeneratedGrammar/GeneratedGrammar";
 import LanguageDropdown from "../../components/LanguageDropdown/LanguageDropdown";
 import LoadingGrammar from "../../components/LoadingGrammar/LoadingGrammar";
+import RefactorDropdown from "../../components/RefactorDropdown/RefactorDropdown";
 
 export default function EditorPage() {
     const [userInput, setUserInput] = useState("");
@@ -263,16 +264,21 @@ export default function EditorPage() {
             {loadingGrammar && <LoadingGrammar />}
             <nav className="editor-page__nav">
                 <div className="editor-page__nav-width">
-                    <TextEditorButtons name="Fix Grammar" handleGrammar={handleGrammar} />
-                    <TextEditorButtons name="Rephrase" handleGPT={handleGPT} />
-                    <TextEditorButtons name="Summarise" handleGPT={handleGPT} />
-                    <div className="editor-page__nav-width-mood">
-                        <TextEditorButtons name="Informal" handleGPT={handleGPT} />
-                        <TextEditorButtons name="Formal" handleGPT={handleGPT} />
+                    <p>Header H1</p>
+                    <div className="editor-page__nav-width-section">
+                        <TextEditorButtons />
+                        <TextEditorButtons />
+                        <TextEditorButtons />
                     </div>
-                    <div className="editor-page__nav-width-length">
-                        <TextEditorButtons name="Shorten" handleGPT={handleGPT} />
-                        <TextEditorButtons name="Expand" handleGPT={handleGPT} />
+                    <div className="editor-page__nav-width-section">
+                        <TextEditorButtons />
+                        <TextEditorButtons />
+                    </div>
+                    <div className="editor-page__nav-width-section">
+                        <TextEditorButtons />
+                        <TextEditorButtons />
+                        <TextEditorButtons />
+                        <TextEditorButtons />
                     </div>
                 </div>
                 <div className="editor-page__nav-placeholder">
@@ -282,6 +288,8 @@ export default function EditorPage() {
             <div className="editor-page__box">
                 <div className="editor-page__box-editor">
                     <div className="editor-page__box-editor-input">
+                        <LanguageDropdown />
+                        <RefactorDropdown />
                         <textarea
                             ref={highlightRef}
                             className="editor-page__box-editor-input-textarea"
@@ -290,36 +298,6 @@ export default function EditorPage() {
                             onChange={(e) => setUserInput(e.target.value)}
                             onKeyDown={handleRequest}
                         />
-                        <div className="editor-page__box-editor-input-items">
-                            <TextEditorSidebarImage
-                                name="Clipboard"
-                                onClick={() => navigator.clipboard.writeText(userInput)}
-                            />
-                            <TextEditorSidebarImage
-                                name={revealContent ? "Grammar" : "Suggestions"}
-                                onClick={() => setRevealContent(!revealContent)}
-                            />
-                            <LanguageDropdown handleDeepL={handleDeepL} />
-                            {revealContent && (
-                                <Iterations iterations={iterations} setIterations={setIterations} />
-                            )}
-                        </div>
-                    </div>
-                    <div className="editor-page__box-editor-choose">
-                        <div className="editor-page__box-editor-choose-box">
-                            {/* <div className="editor-page__box-editor-choose-box-headers">
-                                <HeadersImg className="editor-page__box-editor-choose-box-headers-indv" />
-                                <UnderlineImg className="editor-page__box-editor-choose-box-headers-indv" />
-                                <BoldImg className="editor-page__box-editor-choose-box-headers-indv" />
-                                <ItalicImg className="editor-page__box-editor-choose-box-headers-indv" />
-                            </div> */}
-                            <div className="editor-page__box-editor-choose-box-words">
-                                <p>
-                                    {userInput.split(" ").length - 1} Words (
-                                    {userInput.split("").length} Characters)
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className="editor-page__box-suggestions">

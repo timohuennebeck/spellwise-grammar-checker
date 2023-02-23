@@ -9,12 +9,22 @@
     justify-content: space-between;
 
     &__logo {
-        width: 6.75%;
+        @include flex-vertical;
+        gap: $small-gap;
+
+        &-img {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        &-name {
+            color: #5e17eb;
+        }
     }
 
     &__nav {
         @include flex-vertical;
-        gap: $large-gap;
+        gap: $medium-gap;
 
         &-chrome,
         &-upgrade {
@@ -41,23 +51,41 @@
         }
 
         &-upgrade {
+            @include shadow;
+            position: relative;
+            background-color: #5e17eb;
+            border-radius: 10rem;
+            padding: 0.5rem 1rem;
+
             &:hover {
+                transform: scale(1.025);
                 cursor: pointer;
-                background-color: #F2ECFD;
-                border-radius: 0.25rem;
+            }
+
+            &-star {
+                &-top {
+                    position: absolute;
+                    z-index: 1;
+                    top: -0.75rem;
+                    right: 1rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+
+                &-bottom {
+                    position: absolute;
+                    z-index: 1;
+                    bottom: -0.75rem;
+                    left: -1.5rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
             }
 
             &-cta {
                 letter-spacing: 0.5px;
-                font-weight: 500;
-                color: #5E17EB;
+                color: $prim-color-1;
             }
-        }
-
-        &-profile {
-            border-radius: 50%;
-            width: 2rem;
-            height: 2rem;
         }
     }
 }

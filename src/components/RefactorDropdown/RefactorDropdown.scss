@@ -1,0 +1,43 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.refactor {
+    @include flex-vertical;
+    @include shadow;
+    position: absolute;
+    background-color: $prim-color-1;
+    padding: 0.5rem;
+    border-radius: 10rem;
+    gap: $small-gap;
+    top: 10rem;
+    left: 1rem;
+    border: 1px solid $prim-color-3;
+
+    &__flag {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    &__usages {
+        @include flex-vertical;
+        gap: 0.25rem;
+        border-left: 1px solid $prim-color-3;
+        padding-left: $small-gap;
+
+        &-box {
+            @include flex-vertical;
+            padding: 0.5rem;
+            border-radius: 50%;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #f2ecfd;
+            }
+
+            &-img {
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+        }
+    }
+}

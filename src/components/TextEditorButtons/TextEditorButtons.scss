@@ -3,24 +3,18 @@
 
 .editor-buttons {
     @include flex-vertical;
-    @include shadow;
     gap: $small-gap;
-    border: 1px solid $prim-color-3;
     border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem;
 
     &:hover {
         cursor: pointer;
-        background-color: $prim-color-3;
+        background-color: #f2ecfd;
     }
 
     &__img {
-        width: 1rem;
-        height: 1rem;
-    }
+        width: 1.25rem;
+        height: 1.25rem;
 
-    &__name {
-        font-size: 0.75rem;
-        font-weight: 500;
     }
 }

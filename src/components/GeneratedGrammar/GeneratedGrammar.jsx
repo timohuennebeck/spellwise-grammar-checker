@@ -4,7 +4,7 @@ import "./GeneratedGrammar.scss";
 import React from "react";
 
 // images
-import checkImg from "../../assets/icons/check.svg";
+import checkImg from "../../assets/icons/no-corrections.png";
 
 // components
 import GrammarError from "../GrammarError/GrammarError";
